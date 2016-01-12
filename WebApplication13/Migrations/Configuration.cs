@@ -83,10 +83,10 @@ namespace WebApplication13.Migrations
 
             johan.Messages.Add(msg1);
 
-            Message msg2 = new Message { Id = 2, Image = "hello world2", Sender = isak, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
-            Message msg3 = new Message { Id = 2, Image = "hello world2", Sender = axel, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
-            Message msg4 = new Message { Id = 2, Image = "hello world2", Sender = johan, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
-            Message msg5 = new Message { Id = 2, Image = "hello world2", Sender = robin, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
+            Message msg2 = new Message { Email = "peonsson@gmail.com", Id = 1, Image = "hello world2", Sender = isak, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
+            Message msg3 = new Message { Email = "peonsson@gmail.com", Id = 2, Image = "hello world2", Sender = axel, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
+            Message msg4 = new Message { Email = "peonsson@gmail.com", Id = 3, Image = "hello world2", Sender = johan, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
+            Message msg5 = new Message { Email = "peonsson@gmail.com", Id = 4, Image = "hello world2", Sender = robin, Receiver = johan, Text = "hello world2", Timestamp = DateTime.Now };
 
             johan.Messages.Add(msg2);
             johan.Messages.Add(msg3);
