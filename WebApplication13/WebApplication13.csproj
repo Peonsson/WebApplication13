@@ -227,6 +227,7 @@
     <Compile Include="Models\FriendDTO.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageDTO.cs" />
+    <Compile Include="Models\MessagePOST.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\WebApplication13Context.cs" />
