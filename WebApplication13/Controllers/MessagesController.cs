@@ -96,60 +96,44 @@ namespace WebApplication13.Controllers
         [ResponseType(typeof(MessagePOST))]
         public async Task<IHttpActionResult> PostMessage(MessagePOST messagePost)
         {
-            Debug.WriteLine("got here1");
-
-            Debug.WriteLine("image: " + messagePost.Image);
+            Debug.WriteLine("\nimage: " + messagePost.Image);
             Debug.WriteLine("receiver: " + messagePost.Receiver);
             Debug.WriteLine("sender: " + messagePost.Sender);
             Debug.WriteLine("text: " + messagePost.Text);
 
             if (!ModelState.IsValid)
             {
-                Debug.WriteLine("got here2");
                 return BadRequest(ModelState);
             }
-            Debug.WriteLine("got here3");
-            User sender = db.Users.Find(messagePost.Sender);
-            User receiver = db.Users.Find(messagePost.Receiver);
+
+            User sender = db.Users.Where(b => b.Email == messagePost.Sender).Include(b => b.Messages).FirstOrDefault();
+            User receiver = db.Users.Where(b => b.Email == messagePost.Receiver).Include(b => b.Messages).FirstOrDefault();
+
             var message = new Message();
             message.Email = sender.Email;
             message.Image = messagePost.Image;
             message.Text = messagePost.Text;
             message.Timestamp = DateTime.Now;
-
-            Debug.WriteLine("got here4");
-
-
-            //using (var context = new WebApplication13Context())
-            //{
-            //    receiver = context.Users.Where(b => b.Email == messagePost.Receiver).Include(b => b.Messages).FirstOrDefault();
-            //}
-
             message.Sender = sender;
             message.Receiver = receiver;
 
-            Debug.WriteLine("got here5");
-
-            receiver.Messages = new List<Message>();
             receiver.Messages.Add(message);
-            Debug.WriteLine("got here6");
 
             db.Messages.Add(message);
-            Debug.WriteLine("got here7");
 
             await db.SaveChangesAsync();
-            Debug.WriteLine("got here8");
 
             using (var context = new WebApplication13Context())
             {
-                User user = context.Users.Where(b => b.Email == messagePost.Receiver).Include(b => b.Messages).FirstOrDefault();
-                Debug.WriteLine("got here9");
+                User user = context.Users.Where(b => b.Email == messagePost.Receiver).Include(y => y.Messages).FirstOrDefault();
+                if (user == null)
+                    Debug.WriteLine("user is null!");
+
+                Debug.WriteLine("user message count: " + user.Messages.Count());
                 foreach (Message msg in user.Messages)
                 {
-                    Debug.WriteLine("got here10");
-                    Debug.WriteLine(msg.Id);
+                    Debug.WriteLine("msg id: " + msg.Id);
                 }
-                Debug.WriteLine("got here11");
             }
 
             return Ok(messagePost);

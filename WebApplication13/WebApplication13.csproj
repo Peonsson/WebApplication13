@@ -239,6 +239,14 @@
     <Compile Include="Migrations\201601121325101_initial5.Designer.cs">
       <DependentUpon>201601121325101_initial5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601121417109_init.cs" />
+    <Compile Include="Migrations\201601121417109_init.Designer.cs">
+      <DependentUpon>201601121417109_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121419026_initwdadwad.cs" />
+    <Compile Include="Migrations\201601121419026_initwdadwad.Designer.cs">
+      <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FriendDTO.cs" />
     <Compile Include="Models\Message.cs" />
@@ -351,6 +359,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601121325101_initial5.resx">
       <DependentUpon>201601121325101_initial5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121417109_init.resx">
+      <DependentUpon>201601121417109_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121419026_initwdadwad.resx">
+      <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
