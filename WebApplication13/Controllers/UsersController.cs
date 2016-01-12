@@ -65,6 +65,10 @@ namespace WebApplication13.Controllers
             return Ok(user);
         }
 
+        //TODO: add friends controller
+        //TODO: google API for adding images to new users
+        //TODO: web-chat client
+
         //// PUT: api/Users/5
         //[ResponseType(typeof(void))]
         //public async Task<IHttpActionResult> PutUser(int id, User user)
