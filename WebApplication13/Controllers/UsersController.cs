@@ -114,7 +114,7 @@ namespace WebApplication13.Controllers
             user.Lastlogin = DateTime.Now;
             user.Register = DateTime.Now;
             user.Status = "Online";
-            user.ImageUrl = "";
+            user.ImageUrl = userPost.ImageUrl;
             user.LastReceivedMessage = DateTime.Now;
 
             db.Users.Add(user);
