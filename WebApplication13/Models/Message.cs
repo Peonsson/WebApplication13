@@ -19,7 +19,7 @@ namespace WebApplication13.Models
         public DateTime Timestamp { get; set; }
 
         // Navigation properties
-        public User Sender { get; set; }
-        public User Receiver { get; set; }
+        public virtual User Sender { get; set; }
+        public virtual User Receiver { get; set; }
     }
 }

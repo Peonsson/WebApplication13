@@ -100,49 +100,57 @@ namespace WebApplication13.Controllers
         //    return StatusCode(HttpStatusCode.NoContent);
         //}
 
-        //// POST: api/Users
-        //[ResponseType(typeof(User))]
-        //public async Task<IHttpActionResult> PostUser(User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Users
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> PostUser(UserPOST userPost)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.Users.Add(user);
-        //    await db.SaveChangesAsync();
+            User user = new Models.User();
+            user.Email = userPost.Email;
+            user.Lastlogin = DateTime.Now;
+            user.Register = DateTime.Now;
+            user.Status = "Online";
+            user.ImageUrl = "";
+            user.LastReceivedMessage = DateTime.Now;
 
-        //    return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        //}
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
 
-//        // DELETE: api/Users/5
-//        [ResponseType(typeof(User))]
-//        public async Task<IHttpActionResult> DeleteUser(int id)
-//        {
-//            User user = await db.Users.FindAsync(id);
-//            if (user == null)
-//            {
-//                return NotFound();
-//            }
+            return Ok(userPost);
+        }
 
-//            db.Users.Remove(user);
-//            await db.SaveChangesAsync();
+        //        // DELETE: api/Users/5
+        //        [ResponseType(typeof(User))]
+        //        public async Task<IHttpActionResult> DeleteUser(int id)
+        //        {
+        //            User user = await db.Users.FindAsync(id);
+        //            if (user == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-//            return Ok(user);
-//        }
+        //            db.Users.Remove(user);
+        //            await db.SaveChangesAsync();
 
-//        protected override void Dispose(bool disposing)
-//        {
-//            if (disposing)
-//            {
-//                db.Dispose();
-//            }
-//            base.Dispose(disposing);
-//        }
+        //            return Ok(user);
+        //        }
 
-//        private bool UserExists(int id)
-//        {
-//            return db.Users.Count(e => e.Id == id) > 0;
-//        }
+        //        protected override void Dispose(bool disposing)
+        //        {
+        //            if (disposing)
+        //            {
+        //                db.Dispose();
+        //            }
+        //            base.Dispose(disposing);
+        //        }
+
+        //        private bool UserExists(int id)
+        //        {
+        //            return db.Users.Count(e => e.Id == id) > 0;
+        //        }
     }
 }

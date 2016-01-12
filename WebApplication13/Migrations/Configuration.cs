@@ -19,8 +19,9 @@ namespace WebApplication13.Migrations
         {
             User johan = new User
             {
+                Id = 1,
                 Lastlogin = DateTime.Now,
-                Email = "Johan@gmail.com",
+                Email = "Peonsson@gmail.com",
                 Register = DateTime.Now,
                 Status = "Online",
                 ImageUrl = "https://s-media-cache-ak0.pinimg.com/736x/35/35/2b/35352b1a98370e68d2000f074a827c20.jpg",
@@ -31,8 +32,9 @@ namespace WebApplication13.Migrations
 
             User robin = new User
             {
+                Id = 2,
                 Lastlogin = DateTime.Now,
-                Email = "Robin@gmail.com",
+                Email = "roppe546@gmail.com",
                 Register = DateTime.Now,
                 Status = "Busy",
                 ImageUrl = "https://s-media-cache-ak0.pinimg.com/736x/35/35/2b/35352b1a98370e68d2000f074a827c20.jpg",
@@ -43,6 +45,7 @@ namespace WebApplication13.Migrations
 
             User isak = new User
             {
+                Id = 3,
                 Lastlogin = DateTime.Now,
                 Email = "Isak@gmail.com",
                 Register = DateTime.Now,
@@ -55,6 +58,7 @@ namespace WebApplication13.Migrations
 
             User axel = new User
             {
+                Id = 4,
                 Lastlogin = DateTime.Now,
                 Email = "Axel@gmail.com",
                 Register = DateTime.Now,
@@ -69,7 +73,11 @@ namespace WebApplication13.Migrations
             johan.Friends.Add(isak);
             johan.Friends.Add(axel);
 
-            context.Users.AddOrUpdate(johan, isak, robin, axel);
+            robin.Friends.Add(johan);
+            robin.Friends.Add(isak);
+            robin.Friends.Add(axel);
+
+            context.Users.AddOrUpdate(x => x.Id, johan, isak, robin, axel);
 
             Message msg1 = new Message { Id = 1, Image = "hello world1", Sender = robin, Receiver = johan, Text = "hello world1", Timestamp = DateTime.Now };
 

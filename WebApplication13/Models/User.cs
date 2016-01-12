@@ -9,8 +9,15 @@ namespace WebApplication13.Models
 {
     public class User
     {
+        public User()
+        {
+            Users = new List<User>();
+            Friends = new List<User>();
+            Messages = new List<Message>();
+        }
+
         [Key]
-        [Required]
+        public int Id { get; set; }
         public String Email { get; set; }
         public DateTime Lastlogin { get; set; }
         public DateTime Register { get; set; }
@@ -18,7 +25,10 @@ namespace WebApplication13.Models
         public String ImageUrl { get; set; }
         public DateTime LastReceivedMessage { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
-        public ICollection<User> Friends { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+
+        [InverseProperty("Friends")]
+        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Friends { get; set; }
     }
 }

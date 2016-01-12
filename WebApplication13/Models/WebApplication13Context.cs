@@ -17,7 +17,6 @@ namespace WebApplication13.Models
     
         public WebApplication13Context() : base("name=WebApplication13Context")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public System.Data.Entity.DbSet<WebApplication13.Models.User> Users { get; set; }

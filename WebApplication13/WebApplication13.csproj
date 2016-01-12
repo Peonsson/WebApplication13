@@ -223,6 +223,22 @@
     <Compile Include="Migrations\201601120801504_Strengthh.Designer.cs">
       <DependentUpon>201601120801504_Strengthh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601121233130_initial1.cs" />
+    <Compile Include="Migrations\201601121233130_initial1.Designer.cs">
+      <DependentUpon>201601121233130_initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121238381_initial3.cs" />
+    <Compile Include="Migrations\201601121238381_initial3.Designer.cs">
+      <DependentUpon>201601121238381_initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121311535_initial4.cs" />
+    <Compile Include="Migrations\201601121311535_initial4.Designer.cs">
+      <DependentUpon>201601121311535_initial4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121325101_initial5.cs" />
+    <Compile Include="Migrations\201601121325101_initial5.Designer.cs">
+      <DependentUpon>201601121325101_initial5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FriendDTO.cs" />
     <Compile Include="Models\Message.cs" />
@@ -230,6 +246,7 @@
     <Compile Include="Models\MessagePOST.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDTO.cs" />
+    <Compile Include="Models\UserPOST.cs" />
     <Compile Include="Models\WebApplication13Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -322,6 +339,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601120801504_Strengthh.resx">
       <DependentUpon>201601120801504_Strengthh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121233130_initial1.resx">
+      <DependentUpon>201601121233130_initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121238381_initial3.resx">
+      <DependentUpon>201601121238381_initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121311535_initial4.resx">
+      <DependentUpon>201601121311535_initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121325101_initial5.resx">
+      <DependentUpon>201601121325101_initial5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
