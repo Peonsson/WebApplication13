@@ -37,6 +37,9 @@ namespace WebApplication13.Controllers
                 user = context.Users.Where(b => b.Email == to).Include(b => b.Messages.Select(y => y.Sender)).FirstOrDefault();
             }
 
+            if(user == null)
+                return BadRequest("User from or to doesn't exist. Please check your spelling.");
+
             var returnMessages = new List<MessageDTO>();
 
             foreach (Message msg in user.Messages)
@@ -51,8 +54,6 @@ namespace WebApplication13.Controllers
                     Timestamp = msg.Timestamp
                 });
             }
-
-            Debug.WriteLine("got here2");
 
             return Ok(returnMessages);
         }
@@ -107,7 +108,12 @@ namespace WebApplication13.Controllers
             }
 
             User sender = db.Users.Where(b => b.Email == messagePost.Sender).Include(b => b.Messages).FirstOrDefault();
+            if (sender == null)
+                return BadRequest("User " + messagePost.Sender + " doesn't exist. Please check your spelling.");
+
             User receiver = db.Users.Where(b => b.Email == messagePost.Receiver).Include(b => b.Messages).FirstOrDefault();
+            if (receiver == null)
+                return BadRequest("User " + messagePost.Receiver + " doesn't exist. Please check your spelling.");
 
             var message = new Message();
             message.Email = sender.Email;

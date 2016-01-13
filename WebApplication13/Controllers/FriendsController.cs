@@ -80,43 +80,31 @@ namespace WebApplication13.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             Debug.WriteLine("friend from: " + friend.From);
             Debug.WriteLine("friend to: " + friend.To);
 
-            Debug.WriteLine("got here0");
-
             User friendFrom = db.Users.Where(b => b.Email == friend.From).FirstOrDefault();
-            Debug.WriteLine("got here1");
             if (friendFrom == null)
-                return BadRequest("friend 'from' doesn't exist. Check your spelling.");
+                return BadRequest("friend 'from' doesn't exist. Please check your spelling.");
 
             User friendTo = db.Users.Where(b => b.Email == friend.To).Include(b => b.Friends).FirstOrDefault();
-            Debug.WriteLine("got here2");
             if (friendTo == null)
-                return BadRequest("friend 'to' doesn't exist. Check your spelling.");
+                return BadRequest("friend 'to' doesn't exist. Please check your spelling.");
 
-            Debug.WriteLine("got here3");
             friendFrom.Friends.Add(friendTo);
-            Debug.WriteLine("got here4");
             friendTo.Friends.Add(friendFrom);
-            Debug.WriteLine("got here5");
 
             foreach (User usr in friendFrom.Friends)
             {
-                Debug.WriteLine("got here6");
                 Debug.WriteLine("friendFrom Email: " + usr.Email);
             }
 
             foreach (User usr in friendTo.Friends)
             {
-                Debug.WriteLine("got here7");
                 Debug.WriteLine("friendTo Email: " + usr.Email);
             }
 
-            Debug.WriteLine("got here8");
             await db.SaveChangesAsync();
-            Debug.WriteLine("got here9");
             return Ok(friend);
         }
 

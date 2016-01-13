@@ -261,6 +261,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserPOST.cs" />
+    <Compile Include="Models\UserPUT.cs" />
     <Compile Include="Models\WebApplication13Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

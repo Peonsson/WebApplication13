@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -59,7 +60,7 @@ namespace WebApplication13.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return BadRequest("User " + email + " doesn't exist. Please check your spelling.");
             }
 
             return Ok(user);
@@ -69,45 +70,45 @@ namespace WebApplication13.Controllers
         //TODO: google API for adding images to new users
         //TODO: web-chat client
 
-        //// PUT: api/Users/5
-        //[ResponseType(typeof(void))]
-        //public async Task<IHttpActionResult> PutUser(int id, User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // PUT: api/Users
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutUser(UserPUT userPut)
+        {
+            Debug.WriteLine("\nUserPUT email: " + userPut.Email);
+            Debug.WriteLine("UserPUT imageUrl: " + userPut.ImageUrl);
+            Debug.WriteLine("UserPUT status: " + userPut.Status);
 
-        //    if (id != user.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.Entry(user).State = EntityState.Modified;
+            User user = db.Users.Where(b => b.Email == userPut.Email).FirstOrDefault();
+            if (user == null)
+                return BadRequest("User " + userPut.Email + " doesn't exist. Please check your spelling.");
 
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!UserExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            user.ImageUrl = userPut.ImageUrl;
+            user.Status = userPut.Status;
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return Ok(userPut);
+        }
 
         // POST: api/Users
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUser(UserPOST userPost)
         {
+            Debug.WriteLine("\nUserPOST email: " + userPost.Email);
+            Debug.WriteLine("UserPOST imageUrl: " + userPost.ImageUrl);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
