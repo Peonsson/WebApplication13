@@ -46,8 +46,6 @@ namespace WebApplication13.Controllers
             {
                 if (!msg.Sender.Email.Equals(from, StringComparison.CurrentCultureIgnoreCase))
                     continue;
-
-                Debug.WriteLine("got here1");
                 returnMessages.Add(new MessageDTO
                 {
                     Id = msg.Id,
@@ -62,8 +60,6 @@ namespace WebApplication13.Controllers
             {
                 if (!msg.Sender.Email.Equals(to, StringComparison.CurrentCultureIgnoreCase))
                     continue;
-
-                Debug.WriteLine("got here2");
                 returnMessages.Add(new MessageDTO
                 {
                     Id = msg.Id,
@@ -81,8 +77,6 @@ namespace WebApplication13.Controllers
             {
                 Debug.WriteLine("id: " + msg.Id + ", timestamp: " + msg.Timestamp);
             }
-
-            returnMessages.Sort(delegate(MessageDTO msg1, MessageDTO msg2) { return msg1.Timestamp.CompareTo(msg2.Timestamp); });
 
             return Ok(returnMessages);
         }
