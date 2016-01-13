@@ -18,11 +18,11 @@ namespace WebApplication13.Controllers
     {
         private WebApplication13Context db = new WebApplication13Context();
 
-        // GET: api/Messages
-        public IQueryable<Message> GetMessages()
-        {
-            return db.Messages;
-        }
+        //// GET: api/Messages
+        //public IQueryable<Message> GetMessages()
+        //{
+        //    return db.Messages;
+        //}
 
         // GET: api/Messages/5
         [ResponseType(typeof(List<MessageDTO>))]
@@ -57,40 +57,40 @@ namespace WebApplication13.Controllers
             return Ok(returnMessages);
         }
 
-        // PUT: api/Messages/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutMessage(int id, Message message)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Messages/5
+        //[ResponseType(typeof(void))]
+        //public async Task<IHttpActionResult> PutMessage(int id, Message message)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != message.Id)
-            {
-                return BadRequest();
-            }
+        //    if (id != message.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(message).State = EntityState.Modified;
+        //    db.Entry(message).State = EntityState.Modified;
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MessageExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await db.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!MessageExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Messages
         [ResponseType(typeof(MessagePOST))]
@@ -139,34 +139,35 @@ namespace WebApplication13.Controllers
             return Ok(messagePost);
         }
 
-        // DELETE: api/Messages/5
-        [ResponseType(typeof(Message))]
-        public async Task<IHttpActionResult> DeleteMessage(int id)
-        {
-            Message message = await db.Messages.FindAsync(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
+    //    // DELETE: api/Messages/5
+    //    [ResponseType(typeof(Message))]
+    //    public async Task<IHttpActionResult> DeleteMessage(int id)
+    //    {
+    //        Message message = await db.Messages.FindAsync(id);
+    //        if (message == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            db.Messages.Remove(message);
-            await db.SaveChangesAsync();
+    //        db.Messages.Remove(message);
+    //        await db.SaveChangesAsync();
 
-            return Ok(message);
-        }
+    //        return Ok(message);
+    //    }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            db.Dispose();
+    //        }
+    //        base.Dispose(disposing);
+    //    }
 
-        private bool MessageExists(int id)
-        {
-            return db.Messages.Count(e => e.Id == id) > 0;
-        }
+    //    private bool MessageExists(int id)
+    //    {
+    //        return db.Messages.Count(e => e.Id == id) > 0;
+    //    }
+    //}
     }
 }
