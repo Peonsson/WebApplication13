@@ -114,16 +114,22 @@ namespace WebApplication13.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = new Models.User();
-            user.Email = userPost.Email;
-            user.Lastlogin = DateTime.Now;
-            user.Register = DateTime.Now;
-            user.Status = "Online";
-            user.ImageUrl = userPost.ImageUrl;
-            user.LastReceivedMessage = DateTime.Now;
+            User usr = db.Users.Where(b => b.Email == userPost.Email).FirstOrDefault();
+            if (usr == null)
+            {
+                User user = new Models.User();
+                user.Email = userPost.Email;
+                user.Lastlogin = DateTime.Now;
+                user.Register = DateTime.Now;
+                user.Status = "Online";
+                user.ImageUrl = userPost.ImageUrl;
+                user.LastReceivedMessage = DateTime.Now;
 
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
+                db.Users.Add(user);
+                await db.SaveChangesAsync();
+
+                return Ok(userPost);
+            }
 
             return Ok(userPost);
         }
