@@ -22,5 +22,7 @@ namespace WebApplication13.Models
         public System.Data.Entity.DbSet<WebApplication13.Models.User> Users { get; set; }
 
         public System.Data.Entity.DbSet<WebApplication13.Models.Message> Messages { get; set; }
+
+        public System.Data.Entity.DbSet<WebApplication13.Models.Friend> Friends { get; set; }
     }
 }

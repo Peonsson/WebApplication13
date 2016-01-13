@@ -164,6 +164,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -247,8 +248,14 @@
     <Compile Include="Migrations\201601121419026_initwdadwad.Designer.cs">
       <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601130903415_derp1.cs" />
+    <Compile Include="Migrations\201601130903415_derp1.Designer.cs">
+      <DependentUpon>201601130903415_derp1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\FriendDTO.cs" />
+    <Compile Include="Models\FriendPOST.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageDTO.cs" />
     <Compile Include="Models\MessagePOST.cs" />
@@ -365,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601121419026_initwdadwad.resx">
       <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601130903415_derp1.resx">
+      <DependentUpon>201601130903415_derp1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
