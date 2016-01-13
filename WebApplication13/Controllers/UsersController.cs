@@ -38,7 +38,7 @@ namespace WebApplication13.Controllers
             return users;
         }
 
-        // GET: api/Users/5
+        // GET: api/Users?email={email}
         [ResponseType(typeof(UserDTO))]
         public async Task<IHttpActionResult> GetUser(String email)
         {

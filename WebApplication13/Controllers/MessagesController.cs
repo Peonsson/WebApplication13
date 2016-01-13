@@ -24,7 +24,7 @@ namespace WebApplication13.Controllers
         //    return db.Messages;
         //}
 
-        // GET: api/Messages/5
+        // GET: api/Messages?from={from}&to={to}
         [ResponseType(typeof(List<MessageDTO>))]
         public async Task<IHttpActionResult> GetMessage(String from, String to)
         {

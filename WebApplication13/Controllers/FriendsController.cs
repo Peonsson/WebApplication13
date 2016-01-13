@@ -150,5 +150,5 @@ namespace WebApplication13.Controllers
     //        return db.Friends.Count(e => e.Id == id) > 0;
     //    }
     //}
-}
+    }
 }
