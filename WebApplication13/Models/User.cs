@@ -9,13 +9,6 @@ namespace WebApplication13.Models
 {
     public class User
     {
-        //public User()
-        //{
-        //    Users = new List<User>();
-        //    Friends = new List<User>();
-        //    Messages = new List<Message>();
-        //}
-
         [Key]
         public int Id { get; set; }
         public String Email { get; set; }
