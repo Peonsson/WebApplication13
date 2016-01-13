@@ -31,21 +31,23 @@ namespace WebApplication13.Controllers
             Debug.WriteLine("from: " + from);
             Debug.WriteLine("to: " + to);
 
-            User user;
-            using (var context = new WebApplication13Context())
-            {
-                user = context.Users.Where(b => b.Email == to).Include(b => b.Messages.Select(y => y.Sender)).FirstOrDefault();
-            }
+            User userTo = db.Users.Where(b => b.Email == to).Include(b => b.Messages.Select(y => y.Sender)).FirstOrDefault();
+            User userFrom = db.Users.Where(b => b.Email == from).Include(b => b.Messages.Select(y => y.Receiver)).FirstOrDefault();
 
-            if(user == null)
-                return BadRequest("User from or to doesn't exist. Please check your spelling.");
+            if (userTo == null)
+                return BadRequest("User " + to + " doesn't exist. Please check your spelling.");
+
+            if (userFrom == null)
+                return BadRequest("User " + from + " doesn't exist. Please check your spelling.");
 
             var returnMessages = new List<MessageDTO>();
 
-            foreach (Message msg in user.Messages)
+            foreach (Message msg in userTo.Messages)
             {
-                if (msg.Sender.Email != from)
+                if (!msg.Sender.Email.Equals(from, StringComparison.CurrentCultureIgnoreCase))
                     continue;
+
+                Debug.WriteLine("got here1");
                 returnMessages.Add(new MessageDTO
                 {
                     Id = msg.Id,
@@ -55,6 +57,32 @@ namespace WebApplication13.Controllers
                     Timestamp = msg.Timestamp
                 });
             }
+
+            foreach (Message msg in userFrom.Messages)
+            {
+                if (!msg.Sender.Email.Equals(to, StringComparison.CurrentCultureIgnoreCase))
+                    continue;
+
+                Debug.WriteLine("got here2");
+                returnMessages.Add(new MessageDTO
+                {
+                    Id = msg.Id,
+                    Email = msg.Sender.Email,
+                    Image = msg.Image,
+                    Text = msg.Text,
+                    Timestamp = msg.Timestamp
+                });
+            }
+
+            Debug.WriteLine("msg count: " + returnMessages.Count());
+            returnMessages.Sort(delegate (MessageDTO msg1, MessageDTO msg2) { return msg1.Timestamp.CompareTo(msg2.Timestamp); });
+
+            foreach (MessageDTO msg in returnMessages)
+            {
+                Debug.WriteLine("id: " + msg.Id + ", timestamp: " + msg.Timestamp);
+            }
+
+            returnMessages.Sort(delegate(MessageDTO msg1, MessageDTO msg2) { return msg1.Timestamp.CompareTo(msg2.Timestamp); });
 
             return Ok(returnMessages);
         }

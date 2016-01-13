@@ -76,12 +76,14 @@ namespace WebApplication13.Controllers
         [ResponseType(typeof(FriendPOST))]
         public async Task<IHttpActionResult> PostFriend(FriendPOST friend)
         {
+
+            Debug.WriteLine("friend from: " + friend.From);
+            Debug.WriteLine("friend to: " + friend.To);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Debug.WriteLine("friend from: " + friend.From);
-            Debug.WriteLine("friend to: " + friend.To);
 
             User friendFrom = db.Users.Where(b => b.Email == friend.From).FirstOrDefault();
             if (friendFrom == null)
