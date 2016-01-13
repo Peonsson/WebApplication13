@@ -48,6 +48,7 @@ namespace WebApplication13.Controllers
                     continue;
                 returnMessages.Add(new MessageDTO
                 {
+                    Id = msg.Id,
                     Email = msg.Sender.Email,
                     Image = msg.Image,
                     Text = msg.Text,
