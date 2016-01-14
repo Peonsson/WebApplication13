@@ -86,9 +86,14 @@ namespace WebApplication13.Controllers
             User user = db.Users.Where(b => b.Email == userPut.Email).FirstOrDefault();
             if (user == null)
                 return BadRequest("User " + userPut.Email + " doesn't exist. Please check your spelling.");
+            
+            //if user didnt change imageUrl she leaves the string empty and we don't change it in database.
+            if(!userPut.ImageUrl.Equals(""))
+                user.ImageUrl = userPut.ImageUrl;
 
-            user.ImageUrl = userPut.ImageUrl;
-            user.Status = userPut.Status;
+            //if user didnt change status she leaves the string empty and we don't change it in database.
+            if (!userPut.Status.Equals(""))
+                user.Status = userPut.Status;
 
             try
             {

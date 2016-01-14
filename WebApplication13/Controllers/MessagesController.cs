@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApplication13.Models;
+using System.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.Storage.Auth;
+using System.Web;
 
 namespace WebApplication13.Controllers
 {
@@ -120,10 +126,45 @@ namespace WebApplication13.Controllers
         [ResponseType(typeof(MessagePOST))]
         public async Task<IHttpActionResult> PostMessage(MessagePOST messagePost)
         {
+            Debug.WriteLine("got here0.1");
+            // Retrieve storage account from connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
+
+            Debug.WriteLine("got here0.2");
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            Debug.WriteLine("got here0.3");
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
+
+            Debug.WriteLine("got here0.4");
+            // Create the container if it doesn't already exist.
+            container.CreateIfNotExists();
+
+            Debug.WriteLine("got here0.5");
+            container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+
+            Debug.WriteLine("got here0.6");
+            // Retrieve reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
+
             Debug.WriteLine("\nimage: " + messagePost.Image);
             Debug.WriteLine("receiver: " + messagePost.Receiver);
             Debug.WriteLine("sender: " + messagePost.Sender);
             Debug.WriteLine("text: " + messagePost.Text);
+
+            Debug.WriteLine("got here1");
+
+            // Create or overwrite the "myblob" blob with contents from a local file.
+            string path = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+
+            Debug.WriteLine(path);
+
+            var fileStream = System.IO.File.OpenRead(path);
+            blockBlob.UploadFromStream(fileStream);
+            
+            Debug.WriteLine("got here2");
 
             if (!ModelState.IsValid)
             {
