@@ -197,85 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601111020536_InitialCreate.cs" />
-    <Compile Include="Migrations\201601111020536_InitialCreate.Designer.cs">
-      <DependentUpon>201601111020536_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111036153_initial.cs" />
-    <Compile Include="Migrations\201601111036153_initial.Designer.cs">
-      <DependentUpon>201601111036153_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111041360_initial2.cs" />
-    <Compile Include="Migrations\201601111041360_initial2.Designer.cs">
-      <DependentUpon>201601111041360_initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111127004_derp.cs" />
-    <Compile Include="Migrations\201601111127004_derp.Designer.cs">
-      <DependentUpon>201601111127004_derp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111250489_derp2.cs" />
-    <Compile Include="Migrations\201601111250489_derp2.Designer.cs">
-      <DependentUpon>201601111250489_derp2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111255420_derp3.cs" />
-    <Compile Include="Migrations\201601111255420_derp3.Designer.cs">
-      <DependentUpon>201601111255420_derp3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111352039_derp4.cs" />
-    <Compile Include="Migrations\201601111352039_derp4.Designer.cs">
-      <DependentUpon>201601111352039_derp4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111407494_derp5.cs" />
-    <Compile Include="Migrations\201601111407494_derp5.Designer.cs">
-      <DependentUpon>201601111407494_derp5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111409535_derp6.cs" />
-    <Compile Include="Migrations\201601111409535_derp6.Designer.cs">
-      <DependentUpon>201601111409535_derp6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111410544_derp7.cs" />
-    <Compile Include="Migrations\201601111410544_derp7.Designer.cs">
-      <DependentUpon>201601111410544_derp7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111411438_derp8.cs" />
-    <Compile Include="Migrations\201601111411438_derp8.Designer.cs">
-      <DependentUpon>201601111411438_derp8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601111438160_derp9.cs" />
-    <Compile Include="Migrations\201601111438160_derp9.Designer.cs">
-      <DependentUpon>201601111438160_derp9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601120801504_Strengthh.cs" />
-    <Compile Include="Migrations\201601120801504_Strengthh.Designer.cs">
-      <DependentUpon>201601120801504_Strengthh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121233130_initial1.cs" />
-    <Compile Include="Migrations\201601121233130_initial1.Designer.cs">
-      <DependentUpon>201601121233130_initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121238381_initial3.cs" />
-    <Compile Include="Migrations\201601121238381_initial3.Designer.cs">
-      <DependentUpon>201601121238381_initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121311535_initial4.cs" />
-    <Compile Include="Migrations\201601121311535_initial4.Designer.cs">
-      <DependentUpon>201601121311535_initial4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121325101_initial5.cs" />
-    <Compile Include="Migrations\201601121325101_initial5.Designer.cs">
-      <DependentUpon>201601121325101_initial5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121417109_init.cs" />
-    <Compile Include="Migrations\201601121417109_init.Designer.cs">
-      <DependentUpon>201601121417109_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121419026_initwdadwad.cs" />
-    <Compile Include="Migrations\201601121419026_initwdadwad.Designer.cs">
-      <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601130903415_derp1.cs" />
-    <Compile Include="Migrations\201601130903415_derp1.Designer.cs">
-      <DependentUpon>201601130903415_derp1.cs</DependentUpon>
+    <Compile Include="Migrations\201601141615023_initial.cs" />
+    <Compile Include="Migrations\201601141615023_initial.Designer.cs">
+      <DependentUpon>201601141615023_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FriendDTO.cs" />
@@ -342,74 +266,17 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601111020536_InitialCreate.resx">
-      <DependentUpon>201601111020536_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111036153_initial.resx">
-      <DependentUpon>201601111036153_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111041360_initial2.resx">
-      <DependentUpon>201601111041360_initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111127004_derp.resx">
-      <DependentUpon>201601111127004_derp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111250489_derp2.resx">
-      <DependentUpon>201601111250489_derp2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111255420_derp3.resx">
-      <DependentUpon>201601111255420_derp3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111352039_derp4.resx">
-      <DependentUpon>201601111352039_derp4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111407494_derp5.resx">
-      <DependentUpon>201601111407494_derp5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111409535_derp6.resx">
-      <DependentUpon>201601111409535_derp6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111410544_derp7.resx">
-      <DependentUpon>201601111410544_derp7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111411438_derp8.resx">
-      <DependentUpon>201601111411438_derp8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601111438160_derp9.resx">
-      <DependentUpon>201601111438160_derp9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601120801504_Strengthh.resx">
-      <DependentUpon>201601120801504_Strengthh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121233130_initial1.resx">
-      <DependentUpon>201601121233130_initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121238381_initial3.resx">
-      <DependentUpon>201601121238381_initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121311535_initial4.resx">
-      <DependentUpon>201601121311535_initial4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121325101_initial5.resx">
-      <DependentUpon>201601121325101_initial5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121417109_init.resx">
-      <DependentUpon>201601121417109_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601121419026_initwdadwad.resx">
-      <DependentUpon>201601121419026_initwdadwad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601130903415_derp1.resx">
-      <DependentUpon>201601130903415_derp1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601141615023_initial.resx">
+      <DependentUpon>201601141615023_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,7 +3,7 @@ namespace WebApplication13.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,7 @@ namespace WebApplication13.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Email = c.String(),
                         Image = c.String(),
                         Text = c.String(maxLength: 256),
                         Timestamp = c.DateTime(nullable: false),
@@ -32,15 +33,27 @@ namespace WebApplication13.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Email = c.String(),
                         Lastlogin = c.DateTime(nullable: false),
                         Register = c.DateTime(nullable: false),
                         Status = c.String(),
-                        User_Id = c.Int(),
+                        ImageUrl = c.String(),
+                        LastReceivedMessage = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.UserUsers",
+                c => new
+                    {
+                        User_Id = c.Int(nullable: false),
+                        User_Id1 = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.User_Id, t.User_Id1 })
                 .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.User_Id);
+                .ForeignKey("dbo.Users", t => t.User_Id1)
+                .Index(t => t.User_Id)
+                .Index(t => t.User_Id1);
             
         }
         
@@ -48,12 +61,15 @@ namespace WebApplication13.Migrations
         {
             DropForeignKey("dbo.Messages", "Sender_Id", "dbo.Users");
             DropForeignKey("dbo.Messages", "Receiver_Id", "dbo.Users");
+            DropForeignKey("dbo.UserUsers", "User_Id1", "dbo.Users");
+            DropForeignKey("dbo.UserUsers", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Messages", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Users", "User_Id", "dbo.Users");
-            DropIndex("dbo.Users", new[] { "User_Id" });
+            DropIndex("dbo.UserUsers", new[] { "User_Id1" });
+            DropIndex("dbo.UserUsers", new[] { "User_Id" });
             DropIndex("dbo.Messages", new[] { "Sender_Id" });
             DropIndex("dbo.Messages", new[] { "Receiver_Id" });
             DropIndex("dbo.Messages", new[] { "User_Id" });
+            DropTable("dbo.UserUsers");
             DropTable("dbo.Users");
             DropTable("dbo.Messages");
         }
