@@ -12,6 +12,8 @@ using System.Web.Http.Description;
 using System.Xml.Serialization;
 using WebApplication13.Models;
 
+using RabbitMQ.Client;
+
 namespace WebApplication13.Controllers
 {
     public class MessagesController : ApiController
