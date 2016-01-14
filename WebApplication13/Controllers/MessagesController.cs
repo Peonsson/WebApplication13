@@ -157,7 +157,7 @@ namespace WebApplication13.Controllers
             Debug.WriteLine("got here1");
 
             // Create or overwrite the "myblob" blob with contents from a local file.
-            string path = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
 
             Debug.WriteLine(path);
 
