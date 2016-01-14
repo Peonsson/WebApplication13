@@ -54,7 +54,7 @@ namespace WebApplication13.Controllers
                 {
                     Email = m.Email,
                     ImageUrl = m.ImageUrl,
-                    LastReceivedMessage = m.LastReceivedMessage,
+                    Status = m.Status,
                 }).ToList()
             }).SingleOrDefaultAsync(u => u.Email.Equals(email));
 
