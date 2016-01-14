@@ -126,58 +126,10 @@ namespace WebApplication13.Controllers
         [ResponseType(typeof(MessagePOST))]
         public async Task<IHttpActionResult> PostMessage(MessagePOST messagePost)
         {
-            Debug.WriteLine("got here0.1");
-            // Retrieve storage account from connection string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
-
-            Debug.WriteLine("got here0.2");
-            // Create the blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            Debug.WriteLine("got here0.3");
-            // Retrieve reference to a previously created container.
-            CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
-
-            Debug.WriteLine("got here0.4");
-            // Create the container if it doesn't already exist.
-            container.CreateIfNotExists();
-
-            Debug.WriteLine("got here0.5");
-            container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
-
-            Debug.WriteLine("got here0.6");
-            // Retrieve reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob.jpg");
-
             Debug.WriteLine("\nimage: " + messagePost.Image);
-            Debug.WriteLine("receiver: " + messagePost.Receiver);
-            Debug.WriteLine("sender: " + messagePost.Sender);
             Debug.WriteLine("text: " + messagePost.Text);
-
-            Debug.WriteLine("got here1");
-
-            // Create or overwrite the "myblob" blob with contents from a local file.
-            string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"App_Data\download.jpg";
-
-            Debug.WriteLine(path);
-
-            var fileStream = System.IO.File.OpenRead(path);
-            blockBlob.UploadFromStream(fileStream);
-            Debug.WriteLine("got here2");
-
-
-            SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy();
-            sasConstraints.SharedAccessStartTime = DateTime.UtcNow.AddMinutes(-5);
-            sasConstraints.SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24);
-            sasConstraints.Permissions = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write;
-
-            //Generate the shared access signature on the blob, setting the constraints directly on the signature.
-            string sasBlobToken = blockBlob.GetSharedAccessSignature(sasConstraints);
-
-            //Return the URI string for the container, including the SAS token.
-            var downloadUrl = blockBlob.Uri + sasBlobToken;
-
-            Debug.WriteLine(downloadUrl);
+            Debug.WriteLine("sender: " + messagePost.Sender);
+            Debug.WriteLine("receiver: " + messagePost.Receiver);
 
             if (!ModelState.IsValid)
             {
@@ -205,19 +157,6 @@ namespace WebApplication13.Controllers
             db.Messages.Add(message);
 
             await db.SaveChangesAsync();
-
-            using (var context = new WebApplication13Context())
-            {
-                User user = context.Users.Where(b => b.Email == messagePost.Receiver).Include(y => y.Messages).FirstOrDefault();
-                if (user == null)
-                    Debug.WriteLine("user is null!");
-
-                Debug.WriteLine("user message count: " + user.Messages.Count());
-                foreach (Message msg in user.Messages)
-                {
-                    Debug.WriteLine("msg id: " + msg.Id);
-                }
-            }
 
             return Ok(messagePost);
         }
