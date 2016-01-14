@@ -147,7 +147,7 @@ namespace WebApplication13.Controllers
 
             Debug.WriteLine("got here0.6");
             // Retrieve reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob.jpg");
 
             Debug.WriteLine("\nimage: " + messagePost.Image);
             Debug.WriteLine("receiver: " + messagePost.Receiver);
@@ -157,14 +157,27 @@ namespace WebApplication13.Controllers
             Debug.WriteLine("got here1");
 
             // Create or overwrite the "myblob" blob with contents from a local file.
-            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"App_Data\download.jpg";
 
             Debug.WriteLine(path);
 
             var fileStream = System.IO.File.OpenRead(path);
             blockBlob.UploadFromStream(fileStream);
-            
             Debug.WriteLine("got here2");
+
+
+            SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy();
+            sasConstraints.SharedAccessStartTime = DateTime.UtcNow.AddMinutes(-5);
+            sasConstraints.SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24);
+            sasConstraints.Permissions = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write;
+
+            //Generate the shared access signature on the blob, setting the constraints directly on the signature.
+            string sasBlobToken = blockBlob.GetSharedAccessSignature(sasConstraints);
+
+            //Return the URI string for the container, including the SAS token.
+            var downloadUrl = blockBlob.Uri + sasBlobToken;
+
+            Debug.WriteLine(downloadUrl);
 
             if (!ModelState.IsValid)
             {
