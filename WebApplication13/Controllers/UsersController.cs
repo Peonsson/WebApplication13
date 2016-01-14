@@ -95,7 +95,9 @@ namespace WebApplication13.Controllers
             if (!userPut.Status.Equals(""))
                 user.Status = userPut.Status;
 
-            user.Lastlogin = DateTime.Now;
+            // if user comes online update lastLogin
+            if(userPut.Status.Equals("Online"))
+                user.Lastlogin = DateTime.Now;
 
             try
             {
