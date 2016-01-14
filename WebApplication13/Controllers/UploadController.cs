@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
+using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using System.Diagnostics;
 using System.Web.Http;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Storage.Auth;
-using System.Configuration;
-
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
-using System.Linq;
 using WebApplication13.Models;
 
 namespace WebApplication13.Controllers

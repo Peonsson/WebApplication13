@@ -278,7 +278,6 @@
       <DependentUpon>201601130903415_derp1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\FriendDTO.cs" />
     <Compile Include="Models\FriendPOST.cs" />
     <Compile Include="Models\Message.cs" />

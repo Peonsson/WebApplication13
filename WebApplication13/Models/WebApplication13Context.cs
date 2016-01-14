@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace WebApplication13.Models
 {
@@ -22,7 +18,5 @@ namespace WebApplication13.Models
         public System.Data.Entity.DbSet<WebApplication13.Models.User> Users { get; set; }
 
         public System.Data.Entity.DbSet<WebApplication13.Models.Message> Messages { get; set; }
-
-        public System.Data.Entity.DbSet<WebApplication13.Models.Friend> Friends { get; set; }
     }
 }
