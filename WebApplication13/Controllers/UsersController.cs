@@ -33,6 +33,7 @@ namespace WebApplication13.Controllers
                             {
                                 ImageUrl = u.ImageUrl,
                                 Email = m.Email,
+                                Status = m.Status,
                             }).ToList()
                         };
 
