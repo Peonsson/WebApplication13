@@ -14,6 +14,10 @@ namespace WebApplication13.Controllers
     public class MessagesController : ApiController
     {
         private WebApplication13Context db = new WebApplication13Context();
+        private static readonly string CONNECTION_URI = "amqp://vxoqwope:CQyPw9I5N8Hn70MjvQu0dd9lwcdnJZA0@spotted-monkey.rmq.cloudamqp.com/vxoqwope";
+        private static ConnectionFactory factory = new ConnectionFactory();
+        private static IConnection rabbitMqConnection = null;
+
 
         //// GET: api/Messages
         //public IQueryable<Message> GetMessages()
@@ -149,38 +153,83 @@ namespace WebApplication13.Controllers
 
             await db.SaveChangesAsync();
 
+            /* TEST CODE START - PUBLISH TO RABBITMQ */
+            // Connect if not already connected
+            if (rabbitMqConnection == null)
+            {
+                factory.Uri = CONNECTION_URI;
+                rabbitMqConnection = factory.CreateConnection();
+            }
+
+            using (var channel = rabbitMqConnection.CreateModel())
+            {
+                channel.ExchangeDeclare(exchange: "logs", type: "fanout");
+
+                MessageDTO msgToPush = new MessageDTO
+                {
+                    Id = -1,
+                    Email = messagePost.Sender,
+                    Image = messagePost.Image,
+                    Text = messagePost.Text,
+                    Timestamp = DateTime.Now
+                };
+
+                string test = Serialize(msgToPush);
+
+                var body = Encoding.UTF8.GetBytes(test);
+                channel.BasicPublish(exchange: "amq.fanout",
+                                     routingKey: "",
+                                     basicProperties: null,
+                                     body: body);
+                Debug.WriteLine(" [x] Sent {0}", test);
+            }
+
+            /* TEST CODE END - PUBLISH TO RABBITMQ */
+
             return Ok(messagePost);
         }
 
-    //    // DELETE: api/Messages/5
-    //    [ResponseType(typeof(Message))]
-    //    public async Task<IHttpActionResult> DeleteMessage(int id)
-    //    {
-    //        Message message = await db.Messages.FindAsync(id);
-    //        if (message == null)
-    //        {
-    //            return NotFound();
-    //        }
+        //    // DELETE: api/Messages/5
+        //    [ResponseType(typeof(Message))]
+        //    public async Task<IHttpActionResult> DeleteMessage(int id)
+        //    {
+        //        Message message = await db.Messages.FindAsync(id);
+        //        if (message == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-    //        db.Messages.Remove(message);
-    //        await db.SaveChangesAsync();
+        //        db.Messages.Remove(message);
+        //        await db.SaveChangesAsync();
 
-    //        return Ok(message);
-    //    }
+        //        return Ok(message);
+        //    }
 
-    //    protected override void Dispose(bool disposing)
-    //    {
-    //        if (disposing)
-    //        {
-    //            db.Dispose();
-    //        }
-    //        base.Dispose(disposing);
-    //    }
+        //    protected override void Dispose(bool disposing)
+        //    {
+        //        if (disposing)
+        //        {
+        //            db.Dispose();
+        //        }
+        //        base.Dispose(disposing);
+        //    }
 
-    //    private bool MessageExists(int id)
-    //    {
-    //        return db.Messages.Count(e => e.Id == id) > 0;
-    //    }
-    //}
+        //    private bool MessageExists(int id)
+        //    {
+        //        return db.Messages.Count(e => e.Id == id) > 0;
+        //    }
+        //}
+
+        // http://stackoverflow.com/questions/2434534/serialize-an-object-to-string
+        public static string Serialize<T>(T toSerialize)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
+
+            using (StringWriter textWriter = new StringWriter())
+            {
+                xmlSerializer.Serialize(textWriter, toSerialize);
+                return textWriter.ToString();
+            }
+        }
     }
 }
