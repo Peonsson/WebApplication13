@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <script>
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
@@ -11,8 +12,17 @@
   }
 </script>
 
-@*<meta name="google-signin-client_id" content="http://892660340941-drojcpkoqv2od72m9b4lq8o84u3ihs11.apps.googleusercontent.com">*@
-<meta name="google-signin-client_id" content="http://892660340941-obmftnmgd6ji3vioomoph2cqbeuqqhn8.apps.googleusercontent.com">
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+    }
+</script>
+
+<meta name="google-signin-client_id" content="735211745518-bsrfhbiok3nmef5nvaoc79umkmg5sl6a.apps.googleusercontent.com" />
 
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
