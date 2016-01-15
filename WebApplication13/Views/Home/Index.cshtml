@@ -2,30 +2,3 @@
     <h1>Super Duper Cloud Messenger</h1>
     <p class="lead">Super Duper Cloud Messenger is a free cloud messaging service where you can send images and text to your friends. Now also supports Google login!</p>
 </div>
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
-
-<script>
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
-    }
-</script>
-
-<meta name="google-signin-client_id" content="735211745518-bsrfhbiok3nmef5nvaoc79umkmg5sl6a.apps.googleusercontent.com" />
-
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-<a href="#" onclick="signOut();">Sign out</a>
