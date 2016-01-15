@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using WebApplication13.Models;
 
 namespace WebApplication13.Controllers
@@ -19,7 +20,8 @@ namespace WebApplication13.Controllers
         private WebApplication13Context db = new WebApplication13Context();
 
         // POST: api/Upload
-        public async Task<HttpResponseMessage> PostFormData()
+        [ResponseType(typeof(UploadDTO))]
+        public async Task<IHttpActionResult> PostFormData()
         {
             //// Check if the request contains multipart/form-data.
             //if (!Request.Content.IsMimeMultipartContent())
@@ -76,11 +78,11 @@ namespace WebApplication13.Controllers
                 fileStream.Close();
                 System.IO.File.Delete(file.LocalFileName);
 
-                return Request.CreateResponse(HttpStatusCode.OK, downloadUrl);
+                return Ok(new UploadDTO() { downloadUri = downloadUrl });
             }
             catch (System.Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return BadRequest();
             }
         }
     }
