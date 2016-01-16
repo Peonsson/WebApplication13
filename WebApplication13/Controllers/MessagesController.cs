@@ -158,20 +158,31 @@ namespace WebApplication13.Controllers
 
             await db.SaveChangesAsync();
 
-            /* TEST CODE START - PUBLISH TO RABBITMQ */
-            // Connect if not already connected
-            if (rabbitMqConnection == null)
-            {
+            /*
+             * Code below pushes to RabbitMQ queues.
+             *
+             */
+
+            // Create a new connection to broker if not already created from before.
+            if (rabbitMqConnection == null) {
                 factory.Uri = CONNECTION_URI;
                 rabbitMqConnection = factory.CreateConnection();
             }
 
-            using (var channel = rabbitMqConnection.CreateModel())
-            {
-                channel.ExchangeDeclare(exchange: "logs", type: "fanout");
+            // Create a channel (virtual connection) within the connection
+            using (var channel = rabbitMqConnection.CreateModel()) {
+                channel.ExchangeDeclare(exchange: "chat", type: "direct");
 
-                MessageDTO msgToPush = new MessageDTO
-                {
+                // Name of queue, format: {sender@email.com}TO{receiver@email.com}
+                string queueName = sender.Email + "TO" + receiver.Email;
+
+                // Declare which queue (create one if it doesn't already exist) to use when publishing message
+                channel.QueueDeclare(queueName, true, false, false, null);
+                channel.QueueBind(queue: queueName, exchange: "chat", routingKey: queueName);
+
+                // Create object to publish
+                MessageDTO msgToPush = new MessageDTO {
+                    // need to get message that was saved to db if we want to send the actual message id
                     Id = -1,
                     Email = messagePost.Sender,
                     Image = messagePost.Image,
@@ -179,17 +190,18 @@ namespace WebApplication13.Controllers
                     Timestamp = DateTime.Now
                 };
 
-                string test = Serialize(msgToPush);
+                // Serialize object and set it as the body of the message to save to queue
+                string serializedMessage = Serialize(msgToPush);
+                var body = Encoding.UTF8.GetBytes(serializedMessage);
 
-                var body = Encoding.UTF8.GetBytes(test);
-                channel.BasicPublish(exchange: "amq.fanout",
-                                     routingKey: "",
+                // Publish to "chat" exchanger with route using queue name to save it to the proper queue
+                channel.BasicPublish(exchange: "chat",
+                                     routingKey: queueName,
                                      basicProperties: null,
                                      body: body);
-                Debug.WriteLine(" [x] Sent {0}", test);
+                Debug.WriteLine("Sent to broker: " + serializedMessage);
             }
 
-            /* TEST CODE END - PUBLISH TO RABBITMQ */
 
             return Ok(messagePost);
         }
@@ -226,8 +238,7 @@ namespace WebApplication13.Controllers
         //}
 
         // http://stackoverflow.com/questions/2434534/serialize-an-object-to-string
-        public static string Serialize<T>(T toSerialize)
-        {
+        public static string Serialize<T>(T toSerialize) {
             XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
 
             using (StringWriter textWriter = new StringWriter())
