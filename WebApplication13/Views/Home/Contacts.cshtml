@@ -31,20 +31,17 @@
 
     function callback(string) {
         var reply = JSON.parse(string);
-        document.writeln("<h5>")
         document.writeln("Email: " + reply.Email + "<br/>");
         document.writeln("Status: " + reply.Status + "<br/>");
         document.writeln("Register: " + reply.Register + "<br/>");
         document.writeln("LastLogin: " + reply.Lastlogin + "<br/>");
         document.writeln("ImageUrl: " + reply.ImageUrl + "<br/>");
-        document.writeln("</h5>")
-        document.writeln("Friends: <br/><br/>");
+        document.writeln("Friends: <br/>");
         var friends = reply.Friends;
 
         for (var i = 0; i < friends.length; i++) {
             show_image(friends[i].ImageUrl, 75, 75, "failed to display image");
             document.writeln(friends[i].Email + "<br/>");
-            
         }
     }
 </script>
