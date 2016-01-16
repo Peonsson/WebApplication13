@@ -17,5 +17,12 @@ namespace WebApplication13.Controllers
 
             return View();
         }
+
+        public ActionResult ChatBody()
+        {
+            ViewBag.Title = "ChatBody Page";
+
+            return View();
+        }
     }
 }
