@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    //window.alert("email: " + localstorage.getItem("email"));
+    document.write("test");
+    document.write("email: " + localStorage.getItem("email"));
+
+    httpGetAsync("http://cloudmessenger.azurewebsites.net/api/Users?Email=" + localStorage.getItem("email"), callback);
+
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+        xmlHttp.send(null);
+    }
+
+    function show_image(src, width, height, alt) {
+        var img = document.createElement("img");
+        img.src = src;
+        img.width = width;
+        img.height = height;
+        img.alt = alt;
+
+        // This next line will just add it to the <body> tag
+        document.body.appendChild(img);
+    }
+
+    function callback(string) {
+        var reply = JSON.parse(string);
+        document.writeln("<h5>")
+        document.writeln("Email: " + reply.Email + "<br/>");
+        document.writeln("Status: " + reply.Status + "<br/>");
+        document.writeln("Register: " + reply.Register + "<br/>");
+        document.writeln("LastLogin: " + reply.Lastlogin + "<br/>");
+        document.writeln("ImageUrl: " + reply.ImageUrl + "<br/>");
+        document.writeln("</h5>")
+        document.writeln("Friends: <br/><br/>");
+        var friends = reply.Friends;
+
+        for (var i = 0; i < friends.length; i++) {
+            show_image(friends[i].ImageUrl, 75, 75, "failed to display image");
+            document.writeln(friends[i].Email + "<br/>");
+            
+        }
+    }
+</script>

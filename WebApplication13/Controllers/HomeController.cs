@@ -11,6 +11,13 @@ namespace WebApplication13.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            ViewBag.Title = "Login Page";
+
+            return View();
+        }
+
         public ActionResult Chat()
         {
             ViewBag.Title = "Chat Page";
@@ -18,9 +25,9 @@ namespace WebApplication13.Controllers
             return View();
         }
 
-        public ActionResult ChatBody()
+        public ActionResult Contacts()
         {
-            ViewBag.Title = "ChatBody Page";
+            ViewBag.Title = "Contacts Page";
 
             return View();
         }
